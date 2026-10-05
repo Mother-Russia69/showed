@@ -61,6 +61,21 @@ npm run generate-keypair
 
 Документация: [Solana Kit — Key pairs](https://www.solanakit.com/docs/advanced-guides/keypairs).
 
+## Схема Supabase
+
+Файл `supabase/schema.sql` создаёт таблицы `events` и `claims`, связь по `event_id` и ограничение `UNIQUE(event_id, wallet)`. RLS включён на обеих таблицах, публичных политик нет. Доступ приложения выполняется на сервере с `SUPABASE_SERVICE_ROLE_KEY`.
+
+Применение вручную:
+
+1. Откройте нужный проект в панели Supabase.
+2. Перейдите в **SQL Editor → New query**.
+3. Скопируйте весь файл `supabase/schema.sql` в редактор и нажмите **Run**.
+4. В **Table Editor** проверьте наличие `events` и `claims` и включённый RLS.
+
+Это начальная схема для проекта, где этих таблиц ещё нет. Применяйте один раз; повторный запуск выдаст ошибку существующей таблицы. Все изменения выполняются одной транзакцией. SQL не удаляет существующие таблицы.
+
+Документация: [Supabase — Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security).
+
 ## Переменные окружения
 
 Все девять переменных из SPEC.md перечислены в `.env.example`: `HELIUS_API_KEY`, `NEXT_PUBLIC_PRIVY_APP_ID`, `PRIVY_APP_SECRET`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SERVER_KEYPAIR`, `MERKLE_TREE_ADDRESS`, `COLLECTION_ADDRESS`, `NEXT_PUBLIC_SITE_URL`.
